@@ -14,23 +14,23 @@ class BottomNavbarWidget extends GetView<BottomNavbarController> {
       appBar: AppBar(
         title: const Text('QR Code Reader'),
       ),
-      floatingActionButton: Obx(() => controller.currentIndex.value == 1 &&
-              controller.allReadingsController.allCards.isNotEmpty
-          ? SizedBox(
-              width: 100,
-              child: FloatingActionButton(
-                onPressed: () => controller.clearAllReadings(),
-                backgroundColor: Colors.red[400],
-                child: const Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: Text(
-                    'Delete All',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-              ),
-            )
-          : const SizedBox()),
+      // floatingActionButton: Obx(() => controller.currentIndex.value == 1 &&
+      //         controller.allReadingsController.allCards.isNotEmpty
+      //     ? SizedBox(
+      //         width: 100,
+      //         child: FloatingActionButton(
+      //           onPressed: () => controller.clearAllReadings(),
+      //           backgroundColor: Colors.red[400],
+      //           child: const Padding(
+      //             padding: EdgeInsets.all(5.0),
+      //             child: Text(
+      //               'Delete All',
+      //               style: TextStyle(color: Colors.white, fontSize: 16),
+      //             ),
+      //           ),
+      //         ),
+      //       )
+      //     : const SizedBox()),
       body: Obx(() => getPage(controller.currentIndex.value)),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             items: const <BottomNavigationBarItem>[

@@ -15,21 +15,34 @@ class ApiClass {
     return result.data;
   }
 
-  Future<List<ClientModel>> getAllClients(
-      int limit, int pageNumber, String search) async {
+  Future<bool> removeQrCodeReading(String uid, String type) async {
+    var url = "${baseUrlMobile}remove_qr_code_read.php";
+
+    Response result = await dio.post(url, data: '${uid}type:$type');
+    return result.data;
+  }
+
+  Future<dynamic> getAllClients(
+      int limit, int pageNumber, String filter) async {
     var url = "${baseUrlMobile}get_all_registered_clients.php";
 
     Response result = await dio.post(url,
         data: jsonEncode(<String, dynamic>{
           'limit': limit,
           'pageNumber': pageNumber,
-          'search': search
+          'filter': filter
         }));
 
-    List<ClientModel> paymentList = result.data!
+    List<ClientModel> clientsList = result.data['clients']!
         .map<ClientModel>((req) => ClientModel.fromJson(jsonEncode(req)))
         .toList();
 
-    return paymentList;
+    return {
+      "clients": clientsList,
+      "count": result.data['count'],
+      "total_count": result.data['total_count'],
+      "total_count_reg": result.data['total_count_reg'],
+      "total_count_unreg": result.data['total_count_unreg'],
+    };
   }
 }

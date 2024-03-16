@@ -9,7 +9,7 @@ class BottomNavbarController extends GetxController {
 
   RxInt currentIndex = 0.obs;
 
-  Future<void> clearAllReadings() async {
-    await allReadingsController.clearAllReadings();
-  }
+  // Future<void> clearAllReadings() async {
+  //   await allReadingsController.clearAllReadings();
+  // }
 }

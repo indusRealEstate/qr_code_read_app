@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_reader_app/api/all_apis.dart';
 import 'package:qr_code_reader_app/controller/all_readings_controller.dart';
+import 'package:qr_code_reader_app/controller/all_reg_controller.dart';
 import 'package:qr_code_reader_app/db/boxes.dart';
 import 'package:qr_code_reader_app/db/vcard.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -14,6 +15,8 @@ class QrCodeReaderController extends GetxController {
 
   AllReadingsController allReadingsController =
       Get.put(AllReadingsController());
+
+  AllRegController allRegController = Get.put(AllRegController());
 
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -124,6 +127,7 @@ class QrCodeReaderController extends GetxController {
                                                           seconds: 3), () {
                                                     qrText('Please Scan');
                                                   }),
+                                                  allRegController.onRefresh(),
                                                   Get.back(closeOverlays: true),
                                                   Get.snackbar('Success',
                                                       'Qr code added successfully!'),
