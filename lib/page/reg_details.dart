@@ -65,20 +65,45 @@ class RegDetailsPage extends GetView<AllRegController> {
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   'Contact No : ',
                   style: TextStyle(fontSize: 20),
                 ),
                 Flexible(
-                  child: Text(
-                    controller.selectedReg.contactNo,
-                    style: const TextStyle(fontSize: 20),
+                  child: InkWell(
+                    onTap: () {
+                      controller
+                          .makePhoneCall(controller.selectedReg.contactNo);
+                    },
+                    child: Row(
+                      children: [
+                        Card(
+                          color: Colors.blue[200],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 1.0, horizontal: 4),
+                            child: Text(
+                              controller.selectedReg.contactNo,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.call,
+                          color: Colors.blue,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   'Email : ',

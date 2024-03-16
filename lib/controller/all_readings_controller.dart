@@ -17,6 +17,8 @@ class AllReadingsController extends GetxController with StateMixin {
 
   AllRegController allRegController = Get.put(AllRegController());
 
+  RxBool deleting = false.obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();

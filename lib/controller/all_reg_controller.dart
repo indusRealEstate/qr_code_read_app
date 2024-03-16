@@ -3,6 +3,7 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:qr_code_reader_app/api/all_apis.dart';
 import 'package:qr_code_reader_app/model/client.dart';
 import 'package:qr_code_reader_app/routes/app_routes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AllRegController extends GetxController with StateMixin {
   AllRegController();
@@ -42,6 +43,19 @@ class AllRegController extends GetxController with StateMixin {
     clientCount(0);
     pagingController.refresh();
     change(null, status: RxStatus.success());
+  }
+
+  Future<void> makePhoneCall(String path) async {
+    final Uri uri = Uri(
+      scheme: 'tel',
+      path: path,
+    );
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $uri';
+    }
   }
 
   Future<void> fetchPage(int pageKey) async {

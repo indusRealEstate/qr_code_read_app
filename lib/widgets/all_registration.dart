@@ -92,7 +92,7 @@ class AllRegWidget extends GetView<AllRegController> {
                             controller.onRefresh();
                           },
                           child: const Text(
-                            'Show Registered',
+                            'Showed Up',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -113,7 +113,7 @@ class AllRegWidget extends GetView<AllRegController> {
                             controller.onRefresh();
                           },
                           child: const Text(
-                            'Show Unregistered',
+                            'Not Showed Up',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
