@@ -4,7 +4,6 @@ import 'package:qr_code_reader_app/api/all_apis.dart';
 import 'package:qr_code_reader_app/controller/all_reg_controller.dart';
 import 'package:qr_code_reader_app/db/boxes.dart';
 import 'package:qr_code_reader_app/db/vcard.dart';
-import 'package:qr_code_reader_app/routes/app_routes.dart';
 
 class AllReadingsController extends GetxController with StateMixin {
   AllReadingsController();
@@ -31,10 +30,11 @@ class AllReadingsController extends GetxController with StateMixin {
   //   change(allCards, status: RxStatus.success());
   // }
 
-  void goToDetailsPage(VCardHive card) {
-    selectedCard = card;
-    Get.toNamed(AppRoutes.readingDetails);
-  }
+  // void goToDetailsPage(VCardHive card) {
+  //   allRegController.selectedReg =
+  //       allRegController.clients.where((cl) => cl.uid == card.uid).first;
+  //   Get.toNamed(AppRoutes.regDetails);
+  // }
 
   Future<void> deleteReading(id) async {
     await apiClass.removeQrCodeReading(id, 'jaipur');

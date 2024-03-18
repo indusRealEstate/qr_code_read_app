@@ -11,16 +11,60 @@ class QrCodeReaderWidget extends GetView<QrCodeReaderController> {
     return Column(
       children: <Widget>[
         Expanded(
-          flex: 5,
+          flex: 4,
           child: QRView(
             key: controller.qrKey,
             onQRViewCreated: controller.onQRViewCreated,
           ),
         ),
         Expanded(
-          flex: 1,
+          flex: 2,
           child: Center(
-            child: Obx(() => Text(controller.qrText.value)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Obx(
+                  () => Text(
+                    controller.qrText.value,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Card(
+                    color: Colors.blue[100],
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(Icons.info),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Flexible(
+                            child: Text(
+                              'Please hold camera near to the QR code until the dialog popup.',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         )
       ],

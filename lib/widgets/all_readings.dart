@@ -26,6 +26,9 @@ class AllReadingsWidget extends StatelessWidget {
       if (state.isNotEmpty) {
         return Column(
           children: [
+            const SizedBox(
+              height: 10,
+            ),
             Text(
               'Total Readings: ${state.length}',
               style: TextStyle(
@@ -33,6 +36,9 @@ class AllReadingsWidget extends StatelessWidget {
                 fontWeight: FontWeight.w600,
                 fontSize: 17,
               ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Expanded(
               child: ListView.builder(
@@ -42,7 +48,7 @@ class AllReadingsWidget extends StatelessWidget {
                   VCardHive vCard = state.getAt(index)!;
                   return GestureDetector(
                     onTap: () {
-                      controller.goToDetailsPage(vCard);
+                      // controller.goToDetailsPage(vCard);
                     },
                     child: ListTile(
                       leading: const CircleAvatar(
@@ -139,7 +145,13 @@ class AllReadingsWidget extends StatelessWidget {
           ],
         );
       } else {
-        return const Center(child: Text('No Readings'));
+        return const Center(
+            child: Text(
+          'No Readings',
+          style: TextStyle(
+            fontSize: 20,
+          ),
+        ));
       }
     } else {
       return const Center(child: CircularProgressIndicator());

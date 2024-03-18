@@ -12,30 +12,33 @@ class BottomNavbarWidget extends GetView<BottomNavbarController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('QR Code Reader'),
+        backgroundColor: Colors.blue,
+        title: const Text(
+          'QR Code Reader',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15.0),
+            child: Text(
+              'v1.0.0',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
-      // floatingActionButton: Obx(() => controller.currentIndex.value == 1 &&
-      //         controller.allReadingsController.allCards.isNotEmpty
-      //     ? SizedBox(
-      //         width: 100,
-      //         child: FloatingActionButton(
-      //           onPressed: () => controller.clearAllReadings(),
-      //           backgroundColor: Colors.red[400],
-      //           child: const Padding(
-      //             padding: EdgeInsets.all(5.0),
-      //             child: Text(
-      //               'Delete All',
-      //               style: TextStyle(color: Colors.white, fontSize: 16),
-      //             ),
-      //           ),
-      //         ),
-      //       )
-      //     : const SizedBox()),
       body: Obx(() => getPage(controller.currentIndex.value)),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
+            elevation: 20,
+            backgroundColor: Colors.white,
+            unselectedItemColor: Colors.grey,
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(Icons.qr_code),
+                icon: Icon(
+                  Icons.qr_code,
+                ),
                 label: 'Reader',
               ),
               BottomNavigationBarItem(
@@ -48,7 +51,7 @@ class BottomNavbarWidget extends GetView<BottomNavbarController> {
               ),
             ],
             currentIndex: controller.currentIndex.value,
-            selectedItemColor: Colors.amber[800],
+            selectedItemColor: Colors.blue,
             onTap: (value) {
               controller.currentIndex(value);
             },

@@ -14,7 +14,7 @@ class AllRegWidget extends GetView<AllRegController> {
         children: [
           Obx(
             () => Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20),
+              padding: const EdgeInsets.only(left: 20.0, right: 20, top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -24,7 +24,7 @@ class AllRegWidget extends GetView<AllRegController> {
                       Text(
                         'Total Registered Clients: ${controller.totalClientsCount.value}',
                         style: TextStyle(
-                          color: Colors.green[700],
+                          color: Colors.blue[700],
                           fontWeight: FontWeight.w600,
                           fontSize: 17,
                         ),
@@ -40,12 +40,18 @@ class AllRegWidget extends GetView<AllRegController> {
                       Text(
                         'Clients Not Showed Up: ${controller.totalClientsCountUnReg.value}',
                         style: TextStyle(
-                          color: Colors.green[700],
+                          color: Colors.amber[900],
                           fontWeight: FontWeight.w600,
                           fontSize: 17,
                         ),
                       ),
                     ],
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      controller.onRefresh();
+                    },
+                    icon: const Icon(Icons.refresh),
                   ),
                   IconButton(
                     onPressed: () {
@@ -122,6 +128,7 @@ class AllRegWidget extends GetView<AllRegController> {
                   )
                 : const SizedBox(),
           ),
+          const Divider(height: 20),
           Expanded(
             child: PagedListView<int, ClientModel>(
               pagingController: controller.pagingController,
