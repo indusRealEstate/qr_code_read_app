@@ -14,23 +14,34 @@ class BottomNavbarWidget extends GetView<BottomNavbarController> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: const Text(
-          'QR Code Reader',
-          style: TextStyle(
+        title: Text(
+          'Hi ${controller.userModel.value!.firstname}!',
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
-        actions: const [
-          Padding(
+        actions: [
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.0),
             child: Text(
               'v1.0.0',
               style: TextStyle(color: Colors.white),
             ),
           ),
+          IconButton(
+              onPressed: () async {
+                controller.isLogouting(true);
+                await controller.logout();
+              },
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ))
         ],
       ),
-      body: Obx(() => getPage(controller.currentIndex.value)),
+      body: Obx(() => controller.isLogouting.value == true
+          ? const Center(child: CircularProgressIndicator())
+          : getPage(controller.currentIndex.value)),
       bottomNavigationBar: Obx(() => BottomNavigationBar(
             elevation: 20,
             backgroundColor: Colors.white,

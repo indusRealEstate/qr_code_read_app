@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:qr_code_reader_app/api/all_apis.dart';
 import 'package:qr_code_reader_app/model/client.dart';
+import 'package:qr_code_reader_app/model/user.dart';
 import 'package:qr_code_reader_app/routes/app_routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -26,6 +27,8 @@ class AllRegController extends GetxController with StateMixin {
   final PagingController<int, ClientModel> pagingController =
       PagingController(firstPageKey: 0);
 
+  RxList<UserModel> allAgents = RxList<UserModel>([]);
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -33,6 +36,8 @@ class AllRegController extends GetxController with StateMixin {
     pagingController.addPageRequestListener((pageKey) {
       fetchPage(pageKey + 1);
     });
+
+    await apiClass.getAllAgents().then((value) => allAgents(value));
 
     change(null, status: RxStatus.success());
   }

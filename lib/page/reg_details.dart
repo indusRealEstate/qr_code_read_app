@@ -127,6 +127,23 @@ class RegDetailsPage extends GetView<AllRegController> {
                   const SizedBox(
                     height: 10,
                   ),
+                  controller.selectedReg.qrCodeRead == '1'
+                      ? Column(
+                          children: [
+                            RegContentWidget(
+                              controller: controller,
+                              isContact: false,
+                              content:
+                                  '${controller.allAgents.where((ag) => ag.userId == controller.selectedReg.readBy).first.firstname} ${controller.allAgents.where((ag) => ag.userId == controller.selectedReg.readBy).first.lastname}',
+                              title: 'Scanned By',
+                              icon: Icons.qr_code,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
                   RegContentWidget(
                     controller: controller,
                     isContact: false,

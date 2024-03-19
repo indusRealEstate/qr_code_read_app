@@ -5,6 +5,7 @@ import 'package:qr_code_reader_app/controller/all_readings_controller.dart';
 import 'package:qr_code_reader_app/controller/all_reg_controller.dart';
 import 'package:qr_code_reader_app/db/boxes.dart';
 import 'package:qr_code_reader_app/db/vcard.dart';
+import 'package:qr_code_reader_app/shared/shared_prefs.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:simple_vcard_parser/simple_vcard_parser.dart';
 
@@ -12,11 +13,12 @@ class QrCodeReaderController extends GetxController {
   QrCodeReaderController();
 
   ApiClass apiClass = ApiClass();
+  SharedPrefs sharedPrefs = SharedPrefs();
 
-  AllReadingsController allReadingsController =
-      Get.put(AllReadingsController());
+  // AllReadingsController allReadingsController =
+  //     Get.put(AllReadingsController());
 
-  AllRegController allRegController = Get.put(AllRegController());
+  // AllRegController allRegController = Get.put(AllRegController());
 
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -33,6 +35,14 @@ class QrCodeReaderController extends GetxController {
     super.onInit();
   }
 
+  AllReadingsController getAllReadingsController() {
+    return Get.put(AllReadingsController());
+  }
+
+  AllRegController getAllRegController() {
+    return Get.put(AllRegController());
+  }
+
   void onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
@@ -42,7 +52,7 @@ class QrCodeReaderController extends GetxController {
 
         var id = newCard.lines[7].toString().split('URL:')[1].trim();
 
-        if (allReadingsController.allCards.get(id) == null) {
+        if (getAllReadingsController().allCards.get(id) == null) {
           qrText('Scanned Successfully!');
 
           Get.defaultDialog(
@@ -93,7 +103,9 @@ class QrCodeReaderController extends GetxController {
                                 MaterialStateProperty.all(Colors.green)),
                         onPressed: () async {
                           adding(true);
-                          await apiClass.readQrCode(id).then((value) => {
+                          String? userId = await sharedPrefs.getUserID();
+                          await apiClass.readQrCode(id, userId!).then((value) =>
+                              {
                                 if (value == true)
                                   {
                                     vcardBox
@@ -125,7 +137,7 @@ class QrCodeReaderController extends GetxController {
                                                   () {
                                                 qrText('Please Scan');
                                               }),
-                                              allRegController.onRefresh(),
+                                              getAllRegController().onRefresh(),
                                               Get.back(closeOverlays: true),
                                               Get.snackbar('Success',
                                                   'Qr code added successfully!'),

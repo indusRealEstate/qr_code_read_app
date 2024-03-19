@@ -3,16 +3,18 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:qr_code_reader_app/model/client.dart';
 import 'package:qr_code_reader_app/model/event.dart';
+import 'package:qr_code_reader_app/model/user.dart';
 
 class ApiClass {
   static const baseUrlMobile = 'https://indusre.ae/reg-form-jaipur-api/';
 
   final dio = Dio();
 
-  Future<bool> readQrCode(String uid) async {
+  Future<bool> readQrCode(String uid, String userId) async {
     var url = "${baseUrlMobile}qr_code_read.php";
 
-    Response result = await dio.post(url, data: uid);
+    Response result = await dio.post(url,
+        data: jsonEncode(<String, String>{'uid': uid, 'userId': userId}));
     return result.data;
   }
 
@@ -55,5 +57,40 @@ class ApiClass {
     EventModel eventDetails = EventModel.fromJson(jsonEncode(result.data));
 
     return eventDetails;
+  }
+
+  Future<UserModel?> login(String username, String password) async {
+    var url = "${baseUrlMobile}login_for_event.php";
+
+    Response result = await dio.post(url,
+        data: jsonEncode(
+            <String, String>{'username': username, 'password': password}));
+
+    if (result.data != 'invalid-user') {
+      final UserModel model = UserModel.fromJson(jsonEncode(result.data));
+      return model;
+    } else {
+      return null;
+    }
+  }
+
+  Future<UserModel> getUser(String uid) async {
+    var url = "${baseUrlMobile}get_agent_details.php";
+
+    Response result = await dio.post(url, data: uid);
+
+    final UserModel model = UserModel.fromJson(jsonEncode(result.data));
+    return model;
+  }
+
+  Future<List<UserModel>> getAllAgents() async {
+    var url = "${baseUrlMobile}get_all_agents.php";
+
+    Response result = await dio.get(url);
+
+    List<UserModel> agentsList = result.data
+        .map<UserModel>((req) => UserModel.fromJson(jsonEncode(req)))
+        .toList();
+    return agentsList;
   }
 }

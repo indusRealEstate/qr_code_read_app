@@ -9,6 +9,7 @@ class ClientModel {
   final String source;
   final DateTime timestamp;
   final String qrCodeRead;
+  final String readBy;
 
   ClientModel({
     required this.id,
@@ -19,6 +20,7 @@ class ClientModel {
     required this.source,
     required this.timestamp,
     required this.qrCodeRead,
+    required this.readBy,
   });
 
   factory ClientModel.fromJson(String str) =>
@@ -35,6 +37,7 @@ class ClientModel {
         source: json["source"],
         timestamp: DateTime.parse(json["timestamp"]),
         qrCodeRead: json["qr_code_read"],
+        readBy: json["read_by"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -46,5 +49,6 @@ class ClientModel {
         "source": source,
         "timestamp": timestamp.toIso8601String(),
         "qr_code_read": qrCodeRead,
+        "read_by": readBy,
       };
 }
