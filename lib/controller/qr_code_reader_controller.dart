@@ -93,55 +93,53 @@ class QrCodeReaderController extends GetxController {
                                 MaterialStateProperty.all(Colors.green)),
                         onPressed: () async {
                           adding(true);
-                          await apiClass
-                              .readQrCode(id, 'jaipur')
-                              .then((value) => {
-                                    if (value == true)
-                                      {
-                                        vcardBox
-                                            .put(
-                                                id,
-                                                VCardHive(
-                                                  uid: newCard.lines[7]
-                                                      .toString()
-                                                      .split('URL:')[1]
-                                                      .trim(),
-                                                  name: newCard.lines[1]
-                                                      .toString()
-                                                      .split('UTF-8:')[1]
-                                                      .trim(),
-                                                  email: newCard.lines[5]
-                                                      .toString()
-                                                      .split('EMAIL:')[1]
-                                                      .trim(),
-                                                  contactNo: newCard.lines[3]
-                                                      .toString()
-                                                      .split('VOICE:')[1]
-                                                      .trim(),
-                                                ))
-                                            .then((value) => {
-                                                  reading = false,
-                                                  adding(false),
-                                                  Future.delayed(
-                                                      const Duration(
-                                                          seconds: 3), () {
-                                                    qrText('Please Scan');
-                                                  }),
-                                                  allRegController.onRefresh(),
-                                                  Get.back(closeOverlays: true),
-                                                  Get.snackbar('Success',
-                                                      'Qr code added successfully!'),
-                                                })
-                                      }
-                                    else
-                                      {
-                                        reading = false,
-                                        adding(false),
-                                        Get.back(closeOverlays: true),
-                                        Get.snackbar(
-                                            'Error', 'Something went wrong'),
-                                      },
-                                  });
+                          await apiClass.readQrCode(id).then((value) => {
+                                if (value == true)
+                                  {
+                                    vcardBox
+                                        .put(
+                                            id,
+                                            VCardHive(
+                                              uid: newCard.lines[7]
+                                                  .toString()
+                                                  .split('URL:')[1]
+                                                  .trim(),
+                                              name: newCard.lines[1]
+                                                  .toString()
+                                                  .split('UTF-8:')[1]
+                                                  .trim(),
+                                              email: newCard.lines[5]
+                                                  .toString()
+                                                  .split('EMAIL:')[1]
+                                                  .trim(),
+                                              contactNo: newCard.lines[3]
+                                                  .toString()
+                                                  .split('VOICE:')[1]
+                                                  .trim(),
+                                            ))
+                                        .then((value) => {
+                                              reading = false,
+                                              adding(false),
+                                              Future.delayed(
+                                                  const Duration(seconds: 3),
+                                                  () {
+                                                qrText('Please Scan');
+                                              }),
+                                              allRegController.onRefresh(),
+                                              Get.back(closeOverlays: true),
+                                              Get.snackbar('Success',
+                                                  'Qr code added successfully!'),
+                                            })
+                                  }
+                                else
+                                  {
+                                    reading = false,
+                                    adding(false),
+                                    Get.back(closeOverlays: true),
+                                    Get.snackbar(
+                                        'Error', 'Something went wrong'),
+                                  },
+                              });
                         },
                         child: Obx(() => adding.value
                             ? const SizedBox(
@@ -169,5 +167,11 @@ class QrCodeReaderController extends GetxController {
         }
       }
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller?.dispose();
   }
 }

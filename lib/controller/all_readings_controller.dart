@@ -37,7 +37,7 @@ class AllReadingsController extends GetxController with StateMixin {
   // }
 
   Future<void> deleteReading(id) async {
-    await apiClass.removeQrCodeReading(id, 'jaipur');
+    await apiClass.removeQrCodeReading(id);
     await allCards.delete(id);
     allRegController.onRefresh();
     change(allCards, status: RxStatus.success());
