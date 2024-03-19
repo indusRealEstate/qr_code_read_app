@@ -93,4 +93,24 @@ class ApiClass {
         .toList();
     return agentsList;
   }
+
+  Future<dynamic> getAllReadings(
+      int limit, int pageNumber, String userId) async {
+    var url = "${baseUrlMobile}get_all_readings_of_agent.php";
+
+    Response result = await dio.post(url,
+        data: jsonEncode(<String, dynamic>{
+          'limit': limit,
+          'pageNumber': pageNumber,
+          'userId': userId
+        }));
+
+    List<ClientModel> readingsList = result.data['readings']
+        .map<ClientModel>((req) => ClientModel.fromJson(jsonEncode(req)))
+        .toList();
+    return {
+      "readings": readingsList,
+      "count": result.data['count'],
+    };
+  }
 }

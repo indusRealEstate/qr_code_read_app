@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:qr_code_reader_app/bindings/base_bindings.dart';
 import 'package:qr_code_reader_app/page/login_page.dart';
-import 'package:qr_code_reader_app/page/reading_details.dart';
 import 'package:qr_code_reader_app/page/reg_details.dart';
 import 'package:qr_code_reader_app/page/splash_screen.dart';
 import 'package:qr_code_reader_app/routes/app_routes.dart';
@@ -24,12 +23,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.base,
       page: () => const BottomNavbarWidget(),
-      binding: BaseBindings(),
-      transition: Transition.circularReveal,
-    ),
-    GetPage(
-      name: AppRoutes.readingDetails,
-      page: () => const ReadingDetailsPage(),
       binding: BaseBindings(),
       transition: Transition.circularReveal,
     ),
