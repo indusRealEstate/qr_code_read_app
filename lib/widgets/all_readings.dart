@@ -15,12 +15,14 @@ class AllReadingsWidget extends GetView<AllReadingsController> {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            'Total Readings: ${controller.allReadings.length}',
-            style: TextStyle(
-              color: Colors.green[700],
-              fontWeight: FontWeight.w600,
-              fontSize: 17,
+          Obx(
+            () => Text(
+              'Total Readings: ${controller.readingsCount.value}',
+              style: TextStyle(
+                color: Colors.green[700],
+                fontWeight: FontWeight.w600,
+                fontSize: 17,
+              ),
             ),
           ),
           const SizedBox(
