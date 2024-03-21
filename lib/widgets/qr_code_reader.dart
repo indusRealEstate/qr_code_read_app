@@ -26,14 +26,14 @@ class QrCodeReaderWidget extends GetView<QrCodeReaderController> {
                 Obx(
                   () => Text(
                     controller.qrText.value,
-                    style: const TextStyle(
-                      fontSize: 20,
+                    style:  TextStyle(
+                      fontSize: Get.theme.textTheme.titleMedium!.fontSize,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -41,20 +41,20 @@ class QrCodeReaderWidget extends GetView<QrCodeReaderController> {
                     color: Colors.blue[100],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5)),
-                    child: const Padding(
-                      padding: EdgeInsets.all(10.0),
+                    child:  Padding(
+                      padding: const EdgeInsets.all(10.0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.info),
-                          SizedBox(
+                          const Icon(Icons.info),
+                          const SizedBox(
                             width: 10,
                           ),
                           Flexible(
                             child: Text(
                               'Please hold camera near to the QR code until the dialog popup.',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: Get.theme.textTheme.labelLarge!.fontSize,
                               ),
                             ),
                           )

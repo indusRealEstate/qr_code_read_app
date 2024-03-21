@@ -21,7 +21,7 @@ class AllReadingsWidget extends GetView<AllReadingsController> {
               style: TextStyle(
                 color: Colors.green[700],
                 fontWeight: FontWeight.w600,
-                fontSize: 17,
+                fontSize: Get.theme.textTheme.titleSmall!.fontSize,
               ),
             ),
           ),
@@ -44,8 +44,14 @@ class AllReadingsWidget extends GetView<AllReadingsController> {
                         color: Colors.white,
                       ),
                     ),
-                    title: Text(item.name),
-                    subtitle: Text(item.uid),
+                    title: Text(
+                      item.name,
+                      style: Get.theme.textTheme.titleMedium,
+                    ),
+                    subtitle: Text(
+                      item.uid,
+                      style: Get.theme.textTheme.labelSmall,
+                    ),
                     trailing: IconButton(
                         onPressed: () {
                           Get.defaultDialog(

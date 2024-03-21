@@ -54,8 +54,9 @@ class EventWidget extends GetView<EventController> {
                 children: [
                   Text(
                     controller.eventDetails.value!.title,
-                    style: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.w700),
+                    style: TextStyle(
+                        fontSize: Get.theme.textTheme.titleLarge!.fontSize,
+                        fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
                     height: 10,
@@ -127,21 +128,21 @@ class EventWidget extends GetView<EventController> {
                   const SizedBox(
                     height: 15,
                   ),
-                  const Row(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on,
-                        size: 17,
+                        size: 15,
                         color: Colors.green,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 3,
                       ),
                       Text(
                         'Location',
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: Get.theme.textTheme.titleMedium!.fontSize,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -154,10 +155,10 @@ class EventWidget extends GetView<EventController> {
                   const SizedBox(
                     height: 15,
                   ),
-                  const Text(
+                  Text(
                     'About',
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: Get.theme.textTheme.titleMedium!.fontSize,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
